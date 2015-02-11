@@ -113,7 +113,7 @@ class PuppetInstance(object):
       msg = "UPDATE %s from %s to %s" % (env, old_rev[:7], new_rev[:7])
       syslog(LOG_NOTICE, msg)
       print(msg)
-      cmd = [self.git, 'pull', '--quiet', self.remote_cache_path, env]
+      cmd = [self.git, 'pull', '--ff-only', '--quiet', self.remote_cache_path, env]
       check_call(cmd, cwd=envpath)
       cmd = [self.git, 'diff', '--name-only', old_rev, new_rev, '--', 'Puppetfile.lock']
       output = check_output(cmd, cwd=envpath)
